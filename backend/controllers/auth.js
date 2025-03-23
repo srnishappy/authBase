@@ -76,7 +76,7 @@ exports.login = async (req, res) => {
       },
     };
 
-    const token = jwt.sign(payload, 'your_secret_key', { expiresIn: '1d' });
+    const token = jwt.sign(payload, 'srnishappy', { expiresIn: '1d' });
 
     res.json({
       user: payload.user,

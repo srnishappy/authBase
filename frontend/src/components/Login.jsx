@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom'; // เพิ่มการใช้งาน Link
+import { Link, useNavigate } from 'react-router-dom'; // เพิ่มการใช้งาน Link
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -16,7 +16,7 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -29,6 +29,8 @@ const Login = () => {
       toast.success('เข้าสู่ระบบสำเร็จ!');
 
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('username', response.data.user.username);
+      navigate('/welcome');
     } catch (err) {
       if (err.response) {
         toast.error(err.response.data.msg || 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ');
